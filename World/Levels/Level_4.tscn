@@ -1,0 +1,126 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Objects/Ice_block/Ice_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Goal/Goal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/Levels/Level.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Sprites/Platform.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=6]
+[ext_resource path="res://World/Levels/Level_5.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Snow_particles/Snow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Fonts/lemon_milk/LEMONMILK-Bold.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://Objects/Border/Borders.tscn" type="PackedScene" id=10]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 9 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 512, 88 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 224, 16 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 248, 16 )
+
+[node name="Level_4" type="Node2D"]
+script = ExtResource( 4 )
+next_stage = ExtResource( 7 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="Fuel_label" type="Label" parent="Control/CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -40.0
+margin_right = 80.0
+margin_bottom = 3.0
+custom_fonts/font = SubResource( 2 )
+text = "asda"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 280, 512 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D"]
+position = Vector2( 232, 0 )
+scale = Vector2( 16, 2.75 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D"]
+position = Vector2( 232, 0 )
+shape = SubResource( 6 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 224, 304 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D2"]
+position = Vector2( -3.8147e-06, 0 )
+scale = Vector2( 7, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D2"]
+shape = SubResource( 4 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 776, 304 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D4"]
+scale = Vector2( 7.75, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D4"]
+position = Vector2( 6.10352e-05, 0 )
+shape = SubResource( 5 )
+
+[node name="Utilities" type="Node2D" parent="."]
+
+[node name="Goal" parent="Utilities" instance=ExtResource( 3 )]
+position = Vector2( 80, 256 )
+
+[node name="Ice_blocks" type="Node2D" parent="."]
+
+[node name="Ice_block" parent="Ice_blocks" instance=ExtResource( 1 )]
+position = Vector2( 488, 160 )
+columns = 8
+rows = 4
+
+[node name="Sprite" parent="Ice_blocks/Ice_block" index="0"]
+scale = Vector2( 8, 4 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 488, 392 )
+fuel = 2
+max_fuel = 2
+
+[node name="Snow" parent="." instance=ExtResource( 8 )]
+
+[node name="Borders" parent="." instance=ExtResource( 10 )]
+
+[editable path="Ice_blocks/Ice_block"]

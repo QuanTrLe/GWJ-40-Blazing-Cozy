@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Sprites/Fire_3.png" type="Texture" id=1]
+[ext_resource path="res://Objects/Campfire/Campfire.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/Fire_particle.png" type="Texture" id=3]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.455959, 0.877273 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.577273 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 128.25
+
+[node name="Campfire" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+fuel_time = 0.75
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 0, 21 )
+emitting = false
+amount = 10
+lifetime = 2.5
+texture = ExtResource( 3 )
+emission_shape = 2
+emission_rect_extents = Vector2( 20, 1 )
+gravity = Vector2( 0, -20 )
+scale_amount = 0.8
+scale_amount_random = 0.3
+scale_amount_curve = SubResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="Fuel_timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="timeout" from="Fuel_timer" to="." method="_on_Transfer_timer_timeout"]

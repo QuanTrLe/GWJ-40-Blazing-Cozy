@@ -1,0 +1,237 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://Objects/Ice_block/Ice_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Objects/Campfire/Campfire.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Goal/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Ice_block/Ice_block.gd" type="Script" id=5]
+[ext_resource path="res://World/Levels/Level.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Sprites/Platform.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Ice_block.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=9]
+[ext_resource path="res://Objects/Snow_particles/Snow.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Fonts/lemon_milk/LEMONMILK-Bold.otf" type="DynamicFontData" id=11]
+[ext_resource path="res://World/Menus/End.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Objects/Border/Borders.tscn" type="PackedScene" id=13]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 11 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 128, 88 )
+
+[sub_resource type="RectangleShape2D" id=16]
+extents = Vector2( 124, 16 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 87.9999, 16 )
+
+[sub_resource type="RectangleShape2D" id=17]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 32, 32 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 32, 96 )
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 32, 96 )
+
+[sub_resource type="RectangleShape2D" id=15]
+extents = Vector2( 64, 16 )
+
+[node name="Level_7" type="Node2D"]
+script = ExtResource( 6 )
+next_stage = ExtResource( 12 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 9 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="Fuel_label" type="Label" parent="Control/CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -40.0
+margin_right = 80.0
+margin_bottom = 3.0
+custom_fonts/font = SubResource( 2 )
+text = "asda"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 128, 512 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D"]
+scale = Vector2( 4, 2.75 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D"]
+shape = SubResource( 8 )
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 88, 136 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D4"]
+position = Vector2( 36, 0 )
+scale = Vector2( 3.875, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D4"]
+position = Vector2( 36.0001, 0 )
+shape = SubResource( 16 )
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 936, 240 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D5"]
+scale = Vector2( 2.75, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D5"]
+shape = SubResource( 7 )
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 680, 136 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D6"]
+scale = Vector2( 2.75, 0.5 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D6"]
+shape = SubResource( 7 )
+
+[node name="Utilities" type="Node2D" parent="."]
+
+[node name="Goal" parent="Utilities" instance=ExtResource( 4 )]
+position = Vector2( 32, 88 )
+
+[node name="Campfire" parent="Utilities" instance=ExtResource( 2 )]
+position = Vector2( 936, 192 )
+fuel = 1
+
+[node name="Ice_blocks" type="Node2D" parent="."]
+
+[node name="Ice_block" type="StaticBody2D" parent="Ice_blocks" groups=["Ice"]]
+position = Vector2( 304, 504 )
+script = ExtResource( 5 )
+piece_size = 32
+
+[node name="Sprite" type="Sprite" parent="Ice_blocks/Ice_block"]
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ice_blocks/Ice_block"]
+shape = SubResource( 17 )
+
+[node name="Pivot" type="Position2D" parent="Ice_blocks/Ice_block"]
+
+[node name="Ice_block2" type="StaticBody2D" parent="Ice_blocks" groups=["Ice"]]
+position = Vector2( 560, 448 )
+script = ExtResource( 5 )
+piece_size = 32
+
+[node name="Sprite" type="Sprite" parent="Ice_blocks/Ice_block2"]
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ice_blocks/Ice_block2"]
+shape = SubResource( 9 )
+
+[node name="Pivot" type="Position2D" parent="Ice_blocks/Ice_block2"]
+
+[node name="Ice_block3" type="StaticBody2D" parent="Ice_blocks" groups=["Ice"]]
+position = Vector2( 808, 392 )
+script = ExtResource( 5 )
+piece_size = 32
+
+[node name="Sprite" type="Sprite" parent="Ice_blocks/Ice_block3"]
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ice_blocks/Ice_block3"]
+shape = SubResource( 10 )
+
+[node name="Pivot" type="Position2D" parent="Ice_blocks/Ice_block3"]
+
+[node name="Ice_block4" type="StaticBody2D" parent="Ice_blocks" groups=["Ice"]]
+position = Vector2( 728, 328 )
+script = ExtResource( 5 )
+piece_size = 32
+rows = 3
+
+[node name="Sprite" type="Sprite" parent="Ice_blocks/Ice_block4"]
+scale = Vector2( 1, 3 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ice_blocks/Ice_block4"]
+shape = SubResource( 11 )
+
+[node name="Pivot" type="Position2D" parent="Ice_blocks/Ice_block4"]
+
+[node name="Ice_block5" parent="Ice_blocks" instance=ExtResource( 1 )]
+position = Vector2( 464, 384 )
+rows = 3
+
+[node name="Ice_block6" type="StaticBody2D" parent="Ice_blocks" groups=["Ice"]]
+position = Vector2( 384, 8 )
+script = ExtResource( 5 )
+piece_size = 32
+rows = 3
+
+[node name="Sprite" type="Sprite" parent="Ice_blocks/Ice_block6"]
+scale = Vector2( 1, 3 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ice_blocks/Ice_block6"]
+shape = SubResource( 12 )
+
+[node name="Pivot" type="Position2D" parent="Ice_blocks/Ice_block6"]
+
+[node name="Ice_block8" type="StaticBody2D" parent="Ice_blocks" groups=["Ice"]]
+position = Vector2( 384, 136 )
+script = ExtResource( 5 )
+piece_size = 16
+columns = 4
+
+[node name="Sprite" type="Sprite" parent="Ice_blocks/Ice_block8"]
+scale = Vector2( 2, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ice_blocks/Ice_block8"]
+shape = SubResource( 15 )
+
+[node name="Pivot" type="Position2D" parent="Ice_blocks/Ice_block8"]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 128, 392 )
+fuel = 2
+max_fuel = 2
+
+[node name="Snow" parent="." instance=ExtResource( 10 )]
+
+[node name="Borders" parent="." instance=ExtResource( 13 )]

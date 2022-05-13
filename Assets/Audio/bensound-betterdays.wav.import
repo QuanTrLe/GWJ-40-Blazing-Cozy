@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bensound-betterdays.wav-6238a7d43c57aca046ba600159d0f292.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/bensound-betterdays.wav"
+dest_files=[ "res://.import/bensound-betterdays.wav-6238a7d43c57aca046ba600159d0f292.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

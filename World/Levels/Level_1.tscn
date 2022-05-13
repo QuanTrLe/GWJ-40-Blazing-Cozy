@@ -1,0 +1,112 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Platform.png" type="Texture" id=2]
+[ext_resource path="res://Objects/Ice_block/Ice_block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Goal/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://World/Levels/Level.gd" type="Script" id=6]
+[ext_resource path="res://World/Levels/Level_2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Objects/Snow_particles/Snow.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Assets/Fonts/lemon_milk/LEMONMILK-Bold.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://Assets/Fonts/lemon_milk/LEMONMILK-Regular.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://Objects/Border/Borders.tscn" type="PackedScene" id=11]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 10 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46.6527, 31.7895 )
+
+[node name="Level_1" type="Node2D"]
+script = ExtResource( 6 )
+next_stage = ExtResource( 7 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="Fuel_label" type="Label" parent="Control/CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -40.0
+margin_right = 80.0
+margin_bottom = 3.0
+custom_fonts/font = SubResource( 2 )
+text = "asda"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Control/CanvasLayer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -128.0
+margin_top = 136.0
+margin_right = 130.0
+margin_bottom = 168.0
+custom_fonts/font = SubResource( 3 )
+text = "Space, melt the ice"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 504, 608 )
+scale = Vector2( 11.1462, -3.04 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D"]
+position = Vector2( 0, -0.210526 )
+scale = Vector2( 1.4579, 0.993421 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D"]
+position = Vector2( 0, -0.210526 )
+shape = SubResource( 1 )
+
+[node name="Utilities" type="Node2D" parent="."]
+
+[node name="Goal" parent="Utilities" instance=ExtResource( 4 )]
+position = Vector2( 728, 480 )
+
+[node name="Ice_blocks" type="Node2D" parent="."]
+
+[node name="Ice_block" parent="Ice_blocks" instance=ExtResource( 3 )]
+position = Vector2( 536, 416 )
+columns = 2
+rows = 3
+
+[node name="Player" parent="." instance=ExtResource( 5 )]
+position = Vector2( 280, 480 )
+fuel = 2
+max_fuel = 2
+
+[node name="Snow" parent="." instance=ExtResource( 8 )]
+
+[node name="Borders" parent="." instance=ExtResource( 11 )]

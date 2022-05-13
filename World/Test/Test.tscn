@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Objects/Ice_block/Ice_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Platform/Platform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Objects/Campfire/Campfire.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Objects/Goal/Goal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/Test/Test.gd" type="Script" id=7]
+
+[node name="Test" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 514, 298 )
+scale = Vector2( 5.18, 3.02 )
+texture = ExtResource( 2 )
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource( 4 )]
+position = Vector2( 424, 520 )
+
+[node name="Utilities" type="Node2D" parent="."]
+
+[node name="Campfire" parent="Utilities" instance=ExtResource( 5 )]
+position = Vector2( 168, 472 )
+z_index = 0
+fuel = 3
+
+[node name="Goal" parent="Utilities" instance=ExtResource( 6 )]
+position = Vector2( 672, 472 )
+z_index = 0
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 304, 472 )
+
+[node name="Ice_blocks" type="Node2D" parent="."]
+
+[node name="Ice_block" parent="Ice_blocks" instance=ExtResource( 1 )]
+position = Vector2( 536, 440 )
+columns = 2
+rows = 2

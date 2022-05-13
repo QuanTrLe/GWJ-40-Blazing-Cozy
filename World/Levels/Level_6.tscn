@@ -1,0 +1,130 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Objects/Campfire/Campfire.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Objects/Goal/Goal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Objects/Ice_block/Ice_block.gd" type="Script" id=4]
+[ext_resource path="res://World/Levels/Level.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Sprites/Platform.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Ice_block.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/background.png" type="Texture" id=8]
+[ext_resource path="res://World/Levels/Level_7.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Objects/Snow_particles/Snow.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Assets/Fonts/lemon_milk/LEMONMILK-Bold.otf" type="DynamicFontData" id=11]
+[ext_resource path="res://Objects/Border/Borders.tscn" type="PackedScene" id=12]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 11 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46.6527, 31.7895 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 96, 96 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 96, 96 )
+
+[node name="Level_6" type="Node2D"]
+script = ExtResource( 5 )
+next_stage = ExtResource( 9 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="Fuel_label" type="Label" parent="Control/CanvasLayer"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -80.0
+margin_top = -40.0
+margin_right = 80.0
+margin_bottom = 3.0
+custom_fonts/font = SubResource( 2 )
+text = "asda"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Platforms"]
+position = Vector2( 504, 608 )
+scale = Vector2( 11.1462, -3.04 )
+
+[node name="Sprite" type="Sprite" parent="Platforms/StaticBody2D"]
+position = Vector2( 0, -0.210526 )
+scale = Vector2( 1.4579, 0.993421 )
+texture = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/StaticBody2D"]
+position = Vector2( 0, -0.210526 )
+shape = SubResource( 1 )
+
+[node name="Utilities" type="Node2D" parent="."]
+
+[node name="Goal" parent="Utilities" instance=ExtResource( 3 )]
+position = Vector2( 880, 480 )
+
+[node name="Campfire" parent="Utilities" instance=ExtResource( 1 )]
+position = Vector2( 488, 480 )
+
+[node name="Ice_blocks" type="Node2D" parent="."]
+
+[node name="Ice_block" type="StaticBody2D" parent="Ice_blocks" groups=["Ice"]]
+position = Vector2( 256, 416 )
+script = ExtResource( 4 )
+piece_size = 32
+columns = 3
+rows = 3
+
+[node name="Sprite" type="Sprite" parent="Ice_blocks/Ice_block"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ice_blocks/Ice_block"]
+shape = SubResource( 4 )
+
+[node name="Pivot" type="Position2D" parent="Ice_blocks/Ice_block"]
+
+[node name="Ice_block2" type="StaticBody2D" parent="Ice_blocks" groups=["Ice"]]
+position = Vector2( 720, 416 )
+script = ExtResource( 4 )
+piece_size = 32
+columns = 3
+rows = 3
+
+[node name="Sprite" type="Sprite" parent="Ice_blocks/Ice_block2"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ice_blocks/Ice_block2"]
+shape = SubResource( 3 )
+
+[node name="Pivot" type="Position2D" parent="Ice_blocks/Ice_block2"]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 96, 480 )
+
+[node name="Snow" parent="." instance=ExtResource( 10 )]
+
+[node name="Borders" parent="." instance=ExtResource( 12 )]

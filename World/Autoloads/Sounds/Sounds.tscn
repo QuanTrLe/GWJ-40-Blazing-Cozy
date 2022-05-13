@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://World/Autoloads/Sounds/Sounds.gd" type="Script" id=1]
+[ext_resource path="res://World/Autoloads/Sounds/Audio_player/AudioStreamPlayer.tscn" type="PackedScene" id=2]
+
+[node name="Sounds" type="Node2D"]
+script = ExtResource( 1 )
+Audio_player = ExtResource( 2 )
